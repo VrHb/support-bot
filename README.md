@@ -2,15 +2,18 @@
 
 Бот ведет диалог с пользователями с помощью [DialogFlow](https://developers.google.com/learn/pathways/chatbots-dialogflow)
 
+Пример работы telegram бота:  
+![telegram bot gif](https://dvmn.org/media/filer_public/7a/08/7a087983-bddd-40a3-b927-a43fb0d2f906/demo_tg_bot.gif)
+
+Пример работы VK бота:  
+![telegram bot gif](https://dvmn.org/media/filer_public/1e/f6/1ef61183-56ad-4094-b3d0-21800bdb8b09/demo_vk_bot.gif)
+
 ## Как установить
 
 Доступны два модуля реализации бота:
 
 - Для VK
 - Для telegram
-
-Пример работы бота:  
-![telegram bot gif](https://dvmn.org/media/filer_public/7a/08/7a087983-bddd-40a3-b927-a43fb0d2f906/demo_tg_bot.gif)
 
 ### Настройка переменных окружения:
 
