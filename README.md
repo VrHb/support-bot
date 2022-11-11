@@ -8,6 +8,7 @@
 
 - Для VK
 - Для telegram
+  ![telegram bot gif](https://dvmn.org/media/filer_public/7a/08/7a087983-bddd-40a3-b927-a43fb0d2f906/demo_tg_bot.gif)
 
 ### Настройка переменных окружения:
 
