@@ -1,0 +1,5 @@
+google-cloud-dialogflow==2.16.1
+google-cloud-storage==2.6.0
+python-dotenv==0.21.0
+python-telegram-bot==13.0
+vk-api==11.9.9
