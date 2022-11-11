@@ -4,7 +4,7 @@
 
 ## Как установить
 
-Доступны два модула реализации бота:
+Доступны два модуля реализации бота:
 
 - Для VK
 - Для telegram
@@ -29,7 +29,7 @@ echo "TG_TOKEN"=<токен бота>" >> .env
 echo "GG_DF_SESSION_ID"=<ID телеграм чата>" >> .env
 ```
 
-3. ID проекта в google cloud, создаем проект и получаем ID по [инструции](https://cloud.google.com/dialogflow/es/docs/quick/setup)
+3. ID проекта в google cloud, создаем проект и получаем ID по [инструкции](https://cloud.google.com/dialogflow/es/docs/quick/setup)
 
 ```
 echo "GG_DF_ID"=<ID вашего проекта>" >> .env
