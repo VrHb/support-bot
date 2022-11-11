@@ -19,17 +19,19 @@ def detect_intent_texts(text, language_code):
     response = session_client.detect_intent(
         request={"session": session, "query_input": query_input}
     )
-    return response
+    if response.query_result.intent.is_fallback:
+        return None
+    return response.query_result.fulfillment_text
 
 
 def send_reply(event, vk_api):
-    intent_text = detect_intent_texts(event.text, "ru-RU")
-    response_text = intent_text.query_result.fulfillment_text
-    vk_api.messages.send(
-        user_id=event.user_id,
-        message=response_text,
-        random_id=random.randint(1, 100)
-    )
+    response_text = detect_intent_texts(event.text, "ru-RU")
+    if response_text:
+        vk_api.messages.send(
+            user_id=event.user_id,
+            message=response_text,
+            random_id=random.randint(1, 100)
+        )
 
 
 if __name__ == "__main__":
