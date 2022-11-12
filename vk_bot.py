@@ -10,6 +10,8 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 from bot_learning import detect_intent_texts, TgbotLogger 
 
 
+logger = logging.getLogger("supportbot")
+
 def send_reply(event, vk_api):
     project_id = os.getenv("GOOGLE_PROJECT_ID")
     session_id = os.getenv("GOOGLE_SESSION_ID")
@@ -30,7 +32,6 @@ def send_reply(event, vk_api):
 if __name__ == "__main__":
     load_dotenv()
     session_id = os.getenv("GOOGLE_SESSION_ID")
-    logger = logging.getLogger("supportbot")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
     bot_logger = TgbotLogger(logger_bot, session_id)

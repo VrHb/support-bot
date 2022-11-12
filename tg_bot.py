@@ -10,6 +10,8 @@ from telegram.ext import CallbackContext, MessageHandler, Filters, Updater
 from bot_learning import detect_intent_texts, TgbotLogger 
 
 
+logger = logging.getLogger("supportbot")
+
 def send_reply(update: Update, context: CallbackContext):
     project_id = os.getenv("GOOGLE_PROJECT_ID")
     session_id = os.getenv("GOOGLE_SESSION_ID")
@@ -29,7 +31,6 @@ def send_reply(update: Update, context: CallbackContext):
 def main() -> None:
     load_dotenv()
     session_id = os.getenv("GOOGLE_SESSION_ID")
-    logger = logging.getLogger("supportbot")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
     bot_logger = TgbotLogger(logger_bot, session_id)

@@ -7,8 +7,6 @@ from dotenv import load_dotenv
 from google.cloud import dialogflow
 
 
-logger = logging.getLogger("supportbot")
-
 class TgbotLogger(logging.Handler):
     
     def __init__(self, tg_bot, chat_id):
