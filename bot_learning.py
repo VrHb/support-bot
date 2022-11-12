@@ -56,10 +56,11 @@ if __name__ == "__main__":
     json_phrases_path = os.path.join(args.json_path, args.file_name)
     with open(json_phrases_path, "rb") as file:
         learning_phrases = json.load(file)
-    create_intent(
-        os.getenv("GOOGLE_PROJECT_ID"),
-        "Как устроиться на работу",
-       learning_phrases["Устройство на работу"]["questions"],
-       [learning_phrases["Устройство на работу"]["answer"],],
-    )
+    for intent_name in learning_phrases:
+        create_intent(
+            os.getenv("GOOGLE_PROJECT_ID"),
+            intent_name,
+           learning_phrases[intent_name]["questions"],
+           [learning_phrases[intent_name]["answer"],],
+        )
 
