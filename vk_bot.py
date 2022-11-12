@@ -11,7 +11,14 @@ from bot_learning import detect_intent_texts, TgbotLogger
 
 
 def send_reply(event, vk_api):
-    response_text = detect_intent_texts(event.text, "ru-RU")
+    project_id = os.getenv("GOOGLE_PROJECT_ID")
+    session_id = os.getenv("GOOGLE_SESSION_ID")
+    response_text = detect_intent_texts(
+        event.text,
+        "ru-RU",
+        project_id,
+        session_id
+    )
     if response_text:
         vk_api.messages.send(
             user_id=event.user_id,
@@ -22,10 +29,11 @@ def send_reply(event, vk_api):
 
 if __name__ == "__main__":
     load_dotenv()
+    session_id = os.getenv("GOOGLE_SESSION_ID")
     logger = logging.getLogger("supportbot")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
-    bot_logger = TgbotLogger(logger_bot, os.getenv("GOOGLE_SESSION_ID"))
+    bot_logger = TgbotLogger(logger_bot, session_id)
     logger.addHandler(bot_logger)
     vk_session = vk_api.VkApi(token=os.getenv("VK_API_KEY"))
     vk_api = vk_session.get_api()

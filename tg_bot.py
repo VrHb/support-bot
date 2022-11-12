@@ -11,7 +11,14 @@ from bot_learning import detect_intent_texts, TgbotLogger
 
 
 def send_reply(update: Update, context: CallbackContext):
-    response_text = detect_intent_texts(update.message.text, "ru-RU")
+    project_id = os.getenv("GOOGLE_PROJECT_ID")
+    session_id = os.getenv("GOOGLE_SESSION_ID")
+    response_text = detect_intent_texts(
+        update.message.text, 
+        "ru-RU",
+        project_id,
+        session_id
+        )
     if response_text:
         context.bot.send_message(
             chat_id=update.effective_chat.id,
@@ -21,10 +28,11 @@ def send_reply(update: Update, context: CallbackContext):
 
 def main() -> None:
     load_dotenv()
+    session_id = os.getenv("GOOGLE_SESSION_ID")
     logger = logging.getLogger("supportbot")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
-    bot_logger = TgbotLogger(logger_bot, os.getenv("GOOGLE_SESSION_ID"))
+    bot_logger = TgbotLogger(logger_bot, session_id)
     logger.addHandler(bot_logger)
     try:
         updater = Updater(token=os.getenv("TGBOT_TOKEN"), use_context=True)

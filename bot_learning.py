@@ -21,11 +21,11 @@ class TgbotLogger(logging.Handler):
         self.tg_bot.send_message(chat_id=self.chat_id, text=log_entry)
 
 
-def detect_intent_texts(text, language_code):
+def detect_intent_texts(text, language_code, project_id, session_id):
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(
-        str(os.getenv("GOOGLE_PROJECT_ID")),
-        str(os.getenv("GOOGLE_SESSION_ID"))
+        project_id,
+        session_id
     )
     text_input = dialogflow.TextInput(text=text, language_code=language_code)
     query_input = dialogflow.QueryInput(text=text_input)
@@ -69,6 +69,7 @@ def create_intent(
     
 if __name__ == "__main__":
     load_dotenv()
+    project_id = os.getenv("GOOGLE_PROJECT_ID")
     parser = argparse.ArgumentParser(
         description="Модуль обучает нейросеть DialogFlow"
     )
@@ -90,7 +91,7 @@ if __name__ == "__main__":
         learning_phrases = json.load(file)
     for intent_name in learning_phrases:
         create_intent(
-            os.getenv("GOOGLE_PROJECT_ID"),
+            project_id, 
             intent_name,
             learning_phrases[intent_name]["questions"],
             [learning_phrases[intent_name]["answer"],],
