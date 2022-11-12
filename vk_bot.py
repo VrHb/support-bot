@@ -24,8 +24,8 @@ class TgbotLogger(logging.Handler):
 def detect_intent_texts(text, language_code):
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(
-        str(os.getenv("GG_DF_ID")),
-        str(os.getenv("GG_DF_SESSION_ID"))
+        str(os.getenv("GOOGLE_PROJECT_ID")),
+        str(os.getenv("GOOGLE_SESSION_ID"))
     )
     text_input = dialogflow.TextInput(text=text, language_code=language_code)
     query_input = dialogflow.QueryInput(text=text_input)
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     logger = logging.getLogger("supportbot")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
-    bot_logger = TgbotLogger(logger_bot, os.getenv("GG_DF_SESSION_ID"))
+    bot_logger = TgbotLogger(logger_bot, os.getenv("GOOGLE_SESSION_ID"))
     logger.addHandler(bot_logger)
     vk_session = vk_api.VkApi(token=os.getenv("VK_API_KEY"))
     vk_api = vk_session.get_api()

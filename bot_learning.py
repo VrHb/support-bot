@@ -57,7 +57,7 @@ if __name__ == "__main__":
     with open(json_phrases_path, "rb") as file:
         learning_phrases = json.load(file)
     create_intent(
-        os.getenv("GG_DF_ID"),
+        os.getenv("GOOGLE_PROJECT_ID"),
         "Как устроиться на работу",
        learning_phrases["Устройство на работу"]["questions"],
        [learning_phrases["Устройство на работу"]["answer"],],
