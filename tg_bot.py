@@ -15,17 +15,17 @@ logger = logging.getLogger("supportbot")
 def send_reply(update: Update, context: CallbackContext):
     project_id = os.getenv("GOOGLE_PROJECT_ID")
     session_id = os.getenv("GOOGLE_SESSION_ID")
-    response_text = detect_intent_texts(
+    response = detect_intent_texts(
         update.message.text, 
         "ru-RU",
         project_id,
         session_id
         )
-    if response_text:
-        context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=response_text
-        )
+    response_text = response.query_result.fulfillment_text
+    context.bot.send_message(
+        chat_id=update.effective_chat.id,
+        text=response_text
+    )
     
 
 def main() -> None:

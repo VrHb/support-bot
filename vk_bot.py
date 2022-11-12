@@ -15,13 +15,14 @@ logger = logging.getLogger("supportbot")
 def send_reply(event, vk_api):
     project_id = os.getenv("GOOGLE_PROJECT_ID")
     session_id = os.getenv("GOOGLE_SESSION_ID")
-    response_text = detect_intent_texts(
+    response = detect_intent_texts(
         event.text,
         "ru-RU",
         project_id,
         session_id
     )
-    if response_text:
+    response_text = response.query_result.fulfillment_text
+    if not response.query_result.intent.is_fallback:
         vk_api.messages.send(
             user_id=event.user_id,
             message=response_text,
