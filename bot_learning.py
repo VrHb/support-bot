@@ -1,3 +1,4 @@
+import argparse
 import os
 import json
 
@@ -36,7 +37,24 @@ def create_intent(
     
 if __name__ == "__main__":
     load_dotenv()
-    with open("questions.json", "rb") as file:
+    parser = argparse.ArgumentParser(
+        description="Модуль обучает нейросеть DialogFlow"
+    )
+    parser.add_argument(
+        "-p",
+        "--json_path",
+        help="Путь с json файлу с фразами",
+        default="."
+    )
+    parser.add_argument(
+        "-f",
+        "--file_name",
+        help="Имя json файла с фразами",
+        default="questions.json"
+    )
+    args = parser.parse_args()
+    json_phrases_path = os.path.join(args.json_path, args.file_name)
+    with open(json_phrases_path, "rb") as file:
         json_file = file.read()
     questions = json.loads(json_file)
     create_intent(
@@ -45,3 +63,4 @@ if __name__ == "__main__":
        questions["Устройство на работу"]["questions"],
        [questions["Устройство на работу"]["answer"],],
     )
+
