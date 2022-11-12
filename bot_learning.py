@@ -60,7 +60,7 @@ if __name__ == "__main__":
         create_intent(
             os.getenv("GOOGLE_PROJECT_ID"),
             intent_name,
-           learning_phrases[intent_name]["questions"],
-           [learning_phrases[intent_name]["answer"],],
+            learning_phrases[intent_name]["questions"],
+            [learning_phrases[intent_name]["answer"],],
         )
 
