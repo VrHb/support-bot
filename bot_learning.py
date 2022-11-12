@@ -55,8 +55,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     json_phrases_path = os.path.join(args.json_path, args.file_name)
     with open(json_phrases_path, "rb") as file:
-        json_file = file.read()
-    questions = json.loads(json_file)
+        questions = json.load(file)
     create_intent(
         os.getenv("GG_DF_ID"),
         "Как устроиться на работу",
