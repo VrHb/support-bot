@@ -32,13 +32,13 @@ echo "TG_TOKEN"=<токен бота>" >> .env
 2. ID вашего чата, можно получить в коде с помощью `bot.get_updates()[0].message.chat_id`
 
 ```
-echo "GG_DF_SESSION_ID"=<ID телеграм чата>" >> .env
+echo "GOOGLE_SESSION_ID"=<ID телеграм чата>" >> .env
 ```
 
 3. ID проекта в google cloud, создаем проект и получаем ID по [инструкции](https://cloud.google.com/dialogflow/es/docs/quick/setup)
 
 ```
-echo "GG_DF_ID"=<ID вашего проекта>" >> .env
+echo "GOOGLE_PROJECT_ID"=<ID вашего проекта>" >> .env
 ```
 
 4. Переменная окружения с путем к json файлу настроек аутентификации, смотрим инструкцию [тут](https://cloud.google.com/docs/authentication/client-libraries)
@@ -76,6 +76,14 @@ pip install -r requirements.txt
 ```
 
 ### Как пользоваться:
+
+- Обучаем DialogFlow:
+
+```
+python bot_learning.py --help
+```
+
+образец json файла можно посмотреть [тут](https://dvmn.org/media/filer_public/a7/db/a7db66c0-1259-4dac-9726-2d1fa9c44f20/questions.json)
 
 - Запускаем vk бота:
 
