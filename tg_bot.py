@@ -1,25 +1,23 @@
 import os
+from functools import partial
 import logging
 
 from dotenv import load_dotenv
 
 import telegram
-from telegram import Update
-from telegram.ext import CallbackContext, MessageHandler, Filters, Updater
+from telegram.ext import MessageHandler, Filters, Updater
 
 from bot_learning import detect_intent_texts, TgbotLogger 
 
 
 logger = logging.getLogger("supportbot")
 
-def send_reply(update: Update, context: CallbackContext):
-    project_id = os.getenv("GOOGLE_PROJECT_ID")
-    tg_session_id = os.getenv("TG_GOOGLE_SESSION_ID")
+def send_reply(update, context, project_id, session_id):
     response = detect_intent_texts(
         update.message.text, 
         "ru-RU",
-        project_id,
-        tg_session_id
+        project_id=project_id,
+        session_id=session_id 
         )
     response_text = response.query_result.fulfillment_text
     context.bot.send_message(
@@ -30,6 +28,8 @@ def send_reply(update: Update, context: CallbackContext):
 
 def main() -> None:
     load_dotenv()
+    project_id = os.getenv("GOOGLE_PROJECT_ID")
+    tg_session_id = os.getenv("TG_GOOGLE_SESSION_ID")
     tg_logger_chat_id = os.getenv("TG_GOOGLE_SESSION_ID")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
@@ -38,11 +38,11 @@ def main() -> None:
     try:
         updater = Updater(token=os.getenv("TGBOT_TOKEN"), use_context=True)
         dispatcher = updater.dispatcher
-        echo_handler = MessageHandler(
+        message_handler = MessageHandler(
             Filters.text & (~Filters.command),
-            send_reply
+        partial(send_reply, session_id=tg_session_id, project_id=project_id)
         )
-        dispatcher.add_handler(echo_handler)
+        dispatcher.add_handler(message_handler)
         updater.start_polling()
         logger.warning("Telegram bot поддержки запущен!")
         updater.idle()
