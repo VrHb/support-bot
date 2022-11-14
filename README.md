@@ -29,25 +29,31 @@ touch .env
 echo "TG_TOKEN"=<токен бота>" >> .env
 ```
 
-2. ID вашего чата, можно получить в коде с помощью `bot.get_updates()[0].message.chat_id`
+2. ID вашего telegram чата, можно получить в коде с помощью `bot.get_updates()[0].message.chat_id`
 
 ```
-echo "GOOGLE_SESSION_ID"=<ID телеграм чата>" >> .env
+echo "TG_GOOGLE_SESSION_ID"=<ID телеграм чата>" >> .env
 ```
 
-3. ID проекта в google cloud, создаем проект и получаем ID по [инструкции](https://cloud.google.com/dialogflow/es/docs/quick/setup)
+3. ID группы в vk, пример `-347107444`
+
+```
+echo "VK_GOOGLE_SESSION_ID"=<ID телеграм чата>" >> .env
+```
+
+4. ID проекта в google cloud, создаем проект и получаем ID по [инструкции](https://cloud.google.com/dialogflow/es/docs/quick/setup)
 
 ```
 echo "GOOGLE_PROJECT_ID"=<ID вашего проекта>" >> .env
 ```
 
-4. Переменная окружения с путем к json файлу настроек аутентификации, смотрим инструкцию [тут](https://cloud.google.com/docs/authentication/client-libraries)
+5. Переменная окружения с путем к json файлу настроек аутентификации, смотрим инструкцию [тут](https://cloud.google.com/docs/authentication/client-libraries)
 
 ```
 echo "GOOGLE_APPLICATION_CREDENTIALS"=<ID вашего проекта>" >> .env
 ```
 
-5. Ключ доступа к API VK, как получить читаем [тут](https://cloud.google.com/docs/authentication/client-libraries)
+6. Ключ доступа к API VK, как получить читаем [тут](https://cloud.google.com/docs/authentication/client-libraries)
 
 ```
 echo "VK_API_KEY"=<ключ API VK>" >> .env

@@ -14,12 +14,12 @@ logger = logging.getLogger("supportbot")
 
 def send_reply(update: Update, context: CallbackContext):
     project_id = os.getenv("GOOGLE_PROJECT_ID")
-    session_id = os.getenv("GOOGLE_SESSION_ID")
+    tg_session_id = os.getenv("TG_GOOGLE_SESSION_ID")
     response = detect_intent_texts(
         update.message.text, 
         "ru-RU",
         project_id,
-        session_id
+        tg_session_id
         )
     response_text = response.query_result.fulfillment_text
     context.bot.send_message(
@@ -30,10 +30,10 @@ def send_reply(update: Update, context: CallbackContext):
 
 def main() -> None:
     load_dotenv()
-    session_id = os.getenv("GOOGLE_SESSION_ID")
+    tg_logger_chat_id = os.getenv("TG_GOOGLE_SESSION_ID")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
-    bot_logger = TgbotLogger(logger_bot, session_id)
+    bot_logger = TgbotLogger(logger_bot, tg_logger_chat_id)
     logger.addHandler(bot_logger)
     try:
         updater = Updater(token=os.getenv("TGBOT_TOKEN"), use_context=True)
