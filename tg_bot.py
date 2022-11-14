@@ -40,7 +40,7 @@ def main() -> None:
         dispatcher = updater.dispatcher
         message_handler = MessageHandler(
             Filters.text & (~Filters.command),
-        partial(send_reply, session_id=tg_session_id, project_id=project_id)
+            partial(send_reply, session_id=tg_session_id, project_id=project_id)
         )
         dispatcher.add_handler(message_handler)
         updater.start_polling()
