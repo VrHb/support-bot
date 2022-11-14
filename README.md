@@ -38,7 +38,7 @@ echo "TG_GOOGLE_SESSION_ID"=<ID телеграм чата>" >> .env
 3. ID группы в vk, пример `-347107444`
 
 ```
-echo "VK_GOOGLE_SESSION_ID"=<ID телеграм чата>" >> .env
+echo "VK_GOOGLE_SESSION_ID"=<ID группы VK>" >> .env
 ```
 
 4. ID проекта в google cloud, создаем проект и получаем ID по [инструкции](https://cloud.google.com/dialogflow/es/docs/quick/setup)
