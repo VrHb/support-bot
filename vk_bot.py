@@ -31,7 +31,7 @@ def send_reply(event, vk_api, project_id, vk_session_id):
 if __name__ == "__main__":
     load_dotenv()
     project_id = os.getenv("GOOGLE_PROJECT_ID")
-    vk_session_id = os.getenv("VK_GOOGLE_SESSION_ID")
+    vk_session_id = f"vk-{os.getenv('VK_GOOGLE_SESSION_ID')}"
     tg_logger_chat_id = os.getenv("TG_GOOGLE_SESSION_ID")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
