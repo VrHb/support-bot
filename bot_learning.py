@@ -34,17 +34,17 @@ def detect_intent_texts(text, language_code, project_id, session_id):
     return response
 
 
-def create_intent(project_id, display_name, questions, answer):
+def create_intent(project_id, display_name, training_phrase_parts, messages):
     intents_client = dialogflow.IntentsClient()
 
     parent = dialogflow.AgentsClient.agent_path(project_id)
     training_phrases = []
-    for training_phrase_part in questions:
+    for training_phrase_part in training_phrase_parts:
         part = dialogflow.Intent.TrainingPhrase.Part(text=training_phrase_part)
         training_phrase = dialogflow.Intent.TrainingPhrase(parts=[part])
         training_phrases.append(training_phrase)
 
-    text = dialogflow.Intent.Message.Text(text=[answer])
+    text = dialogflow.Intent.Message.Text(text=[messages])
     message = dialogflow.Intent.Message(text=text)
 
     intent = dialogflow.Intent(
@@ -81,10 +81,11 @@ if __name__ == "__main__":
     json_phrases_path = os.path.join(args.json_path, args.file_name)
     with open(json_phrases_path, "rb") as file:
         learning_phrases = json.load(file)
-    for intent_name in learning_phrases:
+    for intent_name, phrases in learning_phrases.items():
         create_intent(
             project_id, 
             intent_name,
-            **learning_phrases[intent_name]
+            phrases["questions"],
+            phrases["answer"]
         )
 
