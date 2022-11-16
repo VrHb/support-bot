@@ -35,25 +35,19 @@ echo "TG_TOKEN"=<токен бота>" >> .env
 echo "TG_USER_ID"=<ID пользователя tg" >> .env
 ```
 
-3. Ваш ID в vk
-
-```
-echo "VK_USER_ID"=<ID пользователя VK>" >> .env
-```
-
-4. ID проекта в google cloud, создаем проект и получаем ID по [инструкции](https://cloud.google.com/dialogflow/es/docs/quick/setup)
+3. ID проекта в google cloud, создаем проект и получаем ID по [инструкции](https://cloud.google.com/dialogflow/es/docs/quick/setup)
 
 ```
 echo "GOOGLE_PROJECT_ID"=<ID вашего проекта>" >> .env
 ```
 
-5. Переменная окружения с путем к json файлу настроек аутентификации, смотрим инструкцию [тут](https://cloud.google.com/docs/authentication/client-libraries)
+4. Переменная окружения с путем к json файлу настроек аутентификации, смотрим инструкцию [тут](https://cloud.google.com/docs/authentication/client-libraries)
 
 ```
 echo "GOOGLE_APPLICATION_CREDENTIALS"=<ID вашего проекта>" >> .env
 ```
 
-6. Ключ доступа к API VK, как получить читаем [тут](https://cloud.google.com/docs/authentication/client-libraries)
+5. Ключ доступа к API VK, как получить читаем [тут](https://cloud.google.com/docs/authentication/client-libraries)
 
 ```
 echo "VK_API_KEY"=<ключ API VK>" >> .env

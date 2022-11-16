@@ -31,7 +31,6 @@ def send_reply(event, vk_api, project_id, vk_session_id):
 if __name__ == "__main__":
     load_dotenv()
     project_id = os.getenv("GOOGLE_PROJECT_ID")
-    vk_session_id = f"vk-{os.getenv('VK_USER_ID')}"
     tg_logger_chat_id = os.getenv("TG_USER_ID")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
@@ -44,7 +43,7 @@ if __name__ == "__main__":
         logger.warning("VK bot поддержки запущен!")
         for event in longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-                send_reply(event, vk_api, project_id, vk_session_id)
+                send_reply(event, vk_api, project_id, f"vk-{event.user_id}")
     except Exception as e:
         logger.error(f"VK bot упал с ошибкой:\n{e}")
 

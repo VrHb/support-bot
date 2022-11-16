@@ -12,12 +12,12 @@ from bot_learning import detect_intent_texts, TgbotLogger
 
 logger = logging.getLogger("supportbot")
 
-def send_reply(update, context, project_id, session_id):
+def send_reply(update, context, project_id):
     response = detect_intent_texts(
         update.message.text, 
         "ru-RU",
         project_id=project_id,
-        session_id=session_id 
+        session_id=f"tg-{update.effective_user.id}" 
         )
     response_text = response.query_result.fulfillment_text
     context.bot.send_message(
@@ -29,7 +29,6 @@ def send_reply(update, context, project_id, session_id):
 def main() -> None:
     load_dotenv()
     project_id = os.getenv("GOOGLE_PROJECT_ID")
-    tg_session_id = f"tg-{os.getenv('TG_USER_ID')}"
     tg_logger_chat_id = os.getenv("TG_USER_ID")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
@@ -40,7 +39,7 @@ def main() -> None:
         dispatcher = updater.dispatcher
         message_handler = MessageHandler(
             Filters.text & (~Filters.command),
-            partial(send_reply, session_id=tg_session_id, project_id=project_id)
+            partial(send_reply, project_id=project_id)
         )
         dispatcher.add_handler(message_handler)
         updater.start_polling()
