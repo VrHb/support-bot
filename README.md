@@ -29,16 +29,16 @@ touch .env
 echo "TG_TOKEN"=<токен бота>" >> .env
 ```
 
-2. ID вашего telegram чата, можно получить в коде с помощью `bot.get_updates()[0].message.chat_id`
+2. Ваш telegram ID, узнать можно `update.effective_user.id`
 
 ```
-echo "TG_GOOGLE_SESSION_ID"=<ID телеграм чата>" >> .env
+echo "TG_USER_ID"=<ID пользователя tg" >> .env
 ```
 
-3. ID группы в vk, пример `-347107444`
+3. Ваш ID в vk
 
 ```
-echo "VK_GOOGLE_SESSION_ID"=<ID группы VK>" >> .env
+echo "VK_USER_ID"=<ID пользователя VK>" >> .env
 ```
 
 4. ID проекта в google cloud, создаем проект и получаем ID по [инструкции](https://cloud.google.com/dialogflow/es/docs/quick/setup)

@@ -29,8 +29,8 @@ def send_reply(update, context, project_id, session_id):
 def main() -> None:
     load_dotenv()
     project_id = os.getenv("GOOGLE_PROJECT_ID")
-    tg_session_id = f"tg-{os.getenv(f'TG_GOOGLE_SESSION_ID')}"
-    tg_logger_chat_id = os.getenv("TG_GOOGLE_SESSION_ID")
+    tg_session_id = f"tg-{os.getenv('TG_USER_ID')}"
+    tg_logger_chat_id = os.getenv("TG_USER_ID")
     logger_bot = telegram.Bot(token=str(os.getenv("TG_LOGGER_TOKEN")))
     logger.setLevel(logging.WARNING)
     bot_logger = TgbotLogger(logger_bot, tg_logger_chat_id)
